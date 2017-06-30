@@ -10,39 +10,55 @@ exports.functionsAnswers = {
   },
 
   functionFunction: function(str) {
-    oldStr = str;
+    let oldStr = str;
     return function(str){return oldStr + ', ' + str};
   },
 
   makeClosures: function(arr, fn) {
-    let close = function(arr, fn) {
+    let result = function(arr, fn) {
       return arr.map((element) => {  
-        return fn(element);
+        let closure = function() {
+          return fn(element);
+        };
+
+        return closure;
       });
     }
 
-    let result = close(arr, fn);
-    return result;
+    return result(arr, fn);
   },
 
   partial: function(fn, str1, str2) {
-
+    let partialFn = fn.bind(this, str1, str2);
+    return partialFn;
   },
 
   useArguments: function() {
     let args = Array.prototype.slice.call(arguments);
-    console.log(args);
+    return args.reduce((acc, element) => {
+      return acc + element;
+    });
   },
 
   callIt: function(fn) {
-
+    let args = Array.prototype.slice.call(arguments, 1);
+    return fn.apply(this, args);
   },
 
   partialUsingArguments: function(fn) {
-
+    let args = Array.prototype.slice.call(arguments, 1);
+    let partialFn = fn.bind(this, ...args);
+    
+    return partialFn;
   },
 
   curryIt: function(fn) {
-
+    return function(a) {
+      return function(b) {
+        return function(c) {
+          return fn(a, b, c);
+        }
+      }
+    }
   }
 };
