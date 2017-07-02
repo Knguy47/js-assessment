@@ -8,9 +8,12 @@ exports.asyncAnswers = {
   },
 
   manipulateRemoteData: function(url) {
-   return $.getJSON(url, (result) => {
-     console.log(result);
-     return result.people;
-   })
+    return new Promise((resolve) => {
+      return $.getJSON(url, (result) => {
+        resolve(result.people.map((person) => {
+          return person.name;
+        }).sort());
+      });
+    });
   }
 };
