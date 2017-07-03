@@ -20,13 +20,36 @@ exports.stringsAnswers = {
   },
 
   wordWrap: function(str, cols) {
-    let words = str.split(' ');
+    const words = str.split(' ');
     let result = '';
-    
-    for(var i = 1; i < words.length; i++) {
-      result += words[i] + '\n';
-    }
-    
+    let currentLine = cols;
+
+    words.forEach((word) => {
+      if(currentLine === cols) {
+        if(word.length >= cols) {
+          result += word + '\n';
+          currentLine = cols;
+        } else {
+          result += word;
+          currentLine -= word.length;
+        }
+      } else if (word.length > currentLine) {
+          if(word.length >= cols) {
+            result += '\n'+ word + '\n';
+            currentLine = cols;
+          } else {
+            result += '\n' + word;
+            currentLine -= word.length;
+          }
+      } else if (word.length + 1 === currentLine) {
+        result += ' ' + word + '\n';
+        currentLine = cols;
+      } else {
+        result += ' ' + word;
+        currentLine -= 1 + word.length;
+      }
+    })
+
     return result;
   },
 
