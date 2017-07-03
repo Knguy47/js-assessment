@@ -11,9 +11,9 @@ exports.objectsAnswers = {
   },
 
   iterate: function(obj) {
-    let result = [];
+    const result = [];
     
-    let keys = Object.keys(obj);
+    const keys = Object.keys(obj);
     keys.forEach((key) => {
       result.push(`${key}: ${obj[key]}`);
     });
