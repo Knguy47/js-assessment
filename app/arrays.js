@@ -29,8 +29,8 @@ exports.arraysAnswers = {
   },
 
   removeWithoutCopy: function(arr, item) {
-    for(let i = 0; i < arr.length; i++) {
-      if(arr[i] === item) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === item) {
         arr.splice(i, 1);
         i -= 1;
       }
@@ -60,7 +60,7 @@ exports.arraysAnswers = {
   },
 
   concat: function(arr1, arr2) {
-    const result =arr1.concat(arr2);
+    const result = [...arr1, ...arr2];
     return result;
   },
 
@@ -71,7 +71,7 @@ exports.arraysAnswers = {
 
   count: function(arr, item) {
     const count = arr.reduce((acc, element) => {
-      if(element === item) {
+      if (element === item) {
         return acc + 1;
       } else {
         return acc;
@@ -82,19 +82,19 @@ exports.arraysAnswers = {
   },
 
   duplicates: function(arr) {
-    let store = {};
+    const store = {};
     const result = [];
     
     arr.forEach((element) => {
-      if(!store[element]) {
+      if (!store[element]) {
         store[element] = 1;
       } else {
         store[element] += 1;
       }
     });
     
-    for(let key in store) {
-      if(store[key] > 1) {
+    for (let key in store) {
+      if (store[key] > 1) {
         result.push(parseInt(key));
       }
     }
@@ -111,9 +111,9 @@ exports.arraysAnswers = {
   },
 
   findAllOccurrences: function(arr, target) {
-    let result = [];
+    const result = [];
     arr.forEach((element, index) => {
-      if(element === target) {
+      if (element === target) {
         result.push(index);
       }
     });
