@@ -2,12 +2,12 @@ exports = typeof window === 'undefined' ? global : window;
 
 exports.countAnswers = {
   count: function (start, end) {
-    let helper = {};
+    const helper = {};
     let counter = start
     console.log(start); 
     
-    let timer = setInterval(() => {
-      if(counter < end) {
+    const timer = setInterval(() => {
+      if (counter < end) {
         counter++;
         console.log(counter);
       }
